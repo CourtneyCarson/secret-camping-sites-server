@@ -1,3 +1,6 @@
+Seed Command: psql -U courtneycarson -d secret_camping -f ./src/seeds/seed.secret_camping.sql
+
+
 #Express Boilerplate!
 
 This is a boilerplate project used for starting new projects!
