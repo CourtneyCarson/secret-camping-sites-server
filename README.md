@@ -1,4 +1,4 @@
-Seed Command: psql -U courtneycarson -d secret_camping -f ./src/seeds/seed.secret_camping.sql
+Seed Command: psql -U courtneycarson -d secret_camping -f ./seeds/seed.secret_camping.sql
 
 
 #Express Boilerplate!

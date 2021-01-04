@@ -1,3 +1,4 @@
+// external resources
 require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
@@ -5,8 +6,12 @@ const cors = require('cors')
 const helmet = require('helmet')
 const {NODE_ENV} = require('./config')
 
+// routers (imports)
+const authRouter = require('./auth/auth-router')
+// build app object
 const app = express()
 
+//morgan settings
 const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
@@ -14,6 +19,15 @@ const morganOption = (NODE_ENV === 'production')
 app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
+
+// add routes here :) 
+//log in route: 
+app.use('/api/auth', authRouter);
+
+
+
+
+
 
 app.get('/', (req, res) => {
   res.send('Hello, world!')
