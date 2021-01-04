@@ -27,6 +27,28 @@ commentsRouter
   });
 
 
+// get comments by location id? 
+commentsRouter
+.route('/:location_id')
+  .get(requireAuth, (req, res, next) => {
+    CommentsService.getAllCommentsByLocId(
+      req.app.get('db'),
+      req.params.loc_id
+    )
+      .then(comments => {
+        if (!comments) {
+          return res.status(400).json({
+            error: { message: `comment does not exist` }
+          });
+        }
+        res.json(comments.map(CommentsService.serializeComment));
+      })
+      .catch(next);
+})
+
+
+// post new comment 
+
 
   
 

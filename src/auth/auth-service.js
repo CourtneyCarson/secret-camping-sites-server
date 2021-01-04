@@ -3,6 +3,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+const { JWT_SECRET } = require('../config');
 
 const AuthService = {
   getUserWithUserName(db, email) {
@@ -19,7 +20,8 @@ const AuthService = {
       algorithm: 'HS256',
     });
   },
-  verifyJWT(token) {
+  verifyJwt(token) {
+    console.log('verify jwt', token, config.JWT_SECRET)
     return jwt.verify(token, config.JWT_SECRET, {
       algorithms: ['HS256'],
     });
