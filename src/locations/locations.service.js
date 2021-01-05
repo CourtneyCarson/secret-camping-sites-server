@@ -16,6 +16,18 @@ const LocationService = {
   //   return db
   //   .from('locations')
   // }
-};
+  insertNewLocation(db, newLoc) {
+    return db
+      .insert(newLoc)
+      .into('locations')
+      .returning('*')
+      .then(rows => {
+        return rows[0];
+      });
+  },
+}
+
+
+
 
 module.exports = LocationService; 
