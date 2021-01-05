@@ -9,7 +9,8 @@ const { NODE_ENV } = require('./config');
 // routers (imports)
 const authRouter = require('./auth/auth-router');
 const usersRouter = require('./users/users-router');
-const commentsRouter = require('./comments/comments-router')
+const commentsRouter = require('./comments/comments-router');
+const locationRouter = require('./locations/locations.router')
 
 // build app object
 const app = express();
@@ -29,6 +30,7 @@ app.use('/api/auth', authRouter);
 // sign up route: 
 app.use('/api/users', usersRouter);
 app.use('/api/comments', commentsRouter);
+app.use('/api/location', locationRouter)
 
 
 
