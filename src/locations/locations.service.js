@@ -25,7 +25,15 @@ const LocationService = {
         return rows[0];
       });
   },
-}
+
+  // get items by keyword (filter) 
+  getItemsByKeyword(db, key_word) {
+    return db
+      .from('locations')
+      .select('*')
+      .where('keyword', 'like', `%${key_word}%`);
+  },
+};
 
 
 

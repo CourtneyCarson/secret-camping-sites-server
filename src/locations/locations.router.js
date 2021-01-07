@@ -27,9 +27,9 @@ locationRouter
       .catch(next);
   })
 
+  // post a new location to db 
   .post(requireAuth, jsonParser, (req, res, next) => {
-    // on front end imageURL is returned from cloudinary but locations table name is image 
-    const { title, content, keyword, image} = req.body;
+    const { title, content, keyword, image } = req.body;
     const newLocation = { user_id: req.user.id, title, content, keyword, image };
 
 
@@ -44,5 +44,36 @@ locationRouter
       .catch(next);
   });
 
-// post req.body title, content, imageURL, store all into db 
+// filter by search word - get request
+locationRouter
+  .route('/keyword/:searchTerm')
+  .all((req, res, next) => {
+    const { searchTerm } = req.params;
+    // console.log(searchTerm)
+    LocationService.getItemsByKeyword(req.app.get('db'), req.params.searchTerm)
+      // console.log('after locservice', searchTerm)
+      .then(loc => {
+        if (!loc) {
+          return res.status(404).json({
+            error: { message: `Location doesn't exist` },
+          });
+        }
+        res.loc = loc;
+        next();
+      })
+      .catch(next);
+  })
+  .get((req, res, next) => {
+    res.json(res.loc);
+  });
+
+
+
+
+
+
+
+
+
+
 module.exports = locationRouter;
