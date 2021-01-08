@@ -151,79 +151,9 @@ locationRouter
 
   /////////////////////////////// SAVE ANOTHER USERS POST TO YOUR ACCOUNT - WILL DO BY UTILIZING USER ID //////////////////////////////////////
 ////save another users posts to your
-locationRouter
-  .route('/user/:user_id')
-  .all((req, res, next) => {
-    if (isNaN(parseInt(req.params.user_id))) {
-      //if there is an error show it
-      return res.status(404).json({
-        error: {
-          message: `Invalid id`
-        }
-      });
-    }
+// post - create many to many table 
+// create - user location table & new service/router
 
-    //connect to the service to get the data
-    LocationService.getUsersById(
-      req.app.get('db'),
-      req.params.user_id
-    )
-      .then(user => {
-        if (!user) {
-          //if there is an error show it
-          return res.status(404).json({
-            error: {
-              message: `User doesn't exist`
-            }
-          });
-        }
-        res.user = user;
-        next();
-      })
-      .catch(next);
-  })
-  .get((req, res, next) => {
-
-    //get each one of the objects from the results and serialize them
-    res.json(res.user);
-  })
-  //relevant
-  .patch(jsonParser, (req, res, next) => {
-
-    //take the input from the user
-    const {
-      title,
-      completed
-    } = req.body;
-    const userToUpdate = {
-      title,
-      completed
-    };
-
-    //validate the input by checking the length of the userToUpdate object to make sure that we have all the values
-    const numberOfValues = Object.values(userToUpdate).filter(Boolean).length;
-    if (numberOfValues === 0) {
-      //if there is an error show it
-      return res.status(400).json({
-        error: {
-          message: `Request body must content either 'title' or 'completed'`
-        }
-      });
-    }
-
-    //save the input in the db
-    LocationService.updateLocationUser(
-      req.app.get('db'),
-      req.params.user_id,
-      userToUpdate
-    )
-      .then(updatedUser => {
-
-        //get each one of the objects from the results and serialize them
-        res.status(200).json(updatedUser);
-      })
-      .catch(next);
-  });
 
 
 

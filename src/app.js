@@ -10,7 +10,8 @@ const { NODE_ENV } = require('./config');
 const authRouter = require('./auth/auth-router');
 const usersRouter = require('./users/users-router');
 const commentsRouter = require('./comments/comments-router');
-const locationRouter = require('./locations/locations.router')
+const locationRouter = require('./locations/locations.router');
+const userLocationRouter = require('./user-locations/user-location-router');
 
 // build app object
 const app = express();
@@ -29,9 +30,12 @@ app.use(cors());
 app.use('/api/auth', authRouter);
 // sign up route: 
 app.use('/api/users', usersRouter);
-app.use('/api/comments', commentsRouter);
+// to view public locations:
 app.use('/api/location', locationRouter)
-
+// to save a public location to your account :
+app.use('/api/userloc', userLocationRouter);
+// add comments to locations saved to your account:
+app.use('/api/comments', commentsRouter);
 
 
 

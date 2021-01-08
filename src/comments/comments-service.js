@@ -8,6 +8,7 @@ const CommentsService = {
       .from('comments')
       .select('*');
   },
+  // 
   getAllCommentsByLocId(db, loc_id) {
     return db
       .select('*')

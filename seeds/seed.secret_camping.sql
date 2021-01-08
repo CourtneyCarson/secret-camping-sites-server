@@ -1,12 +1,14 @@
 BEGIN; 
 
-TRUNCATE
+TRUNCATE 
   users,
   locations, 
+  user_locations,
   ratings, 
   comments
+  
 
-  RESTART IDENTITY;
+  RESTART IDENTITY CASCADE;
 
 INSERT INTO users (id, email, password)
 VALUES 
@@ -32,3 +34,13 @@ INSERT INTO comments (id, location_id, title, content)
 VALUES 
 (1,1,'title','here are some notes');
 
+INSERT INTO user_locations (id, user_id, location_id)
+VALUES
+(1,1,1),
+(2,1,3),
+(3,1,4);
+
+-- this will start the unique id's at 4 since seed files 
+SELECT setval('user_locations_id_seq', 4);
+
+COMMIT;
