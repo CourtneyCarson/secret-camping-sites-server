@@ -19,10 +19,10 @@ VALUES
 INSERT INTO locations (id, user_id,  image, title, content, keyword, is_public)  
 VALUES
 
-  (1, 3, 'https://live.staticflickr.com/65535/50607295132_069ed53912_w.jpg', 'location 1', 'info about location 1', 'Sandy River, Oregon', true ),
-  (2, 3, 'https://live.staticflickr.com/65535/50607295132_069ed53912_w.jpg', 'location 2', 'info about location 2', 'San Diego, California', true ),
-  (3, 3, 'https://live.staticflickr.com/65535/50607295132_069ed53912_w.jpg', 'location 3', 'info about location 3', 'Kings Valley, Hawaii', true ),
-  (4, 3, 'https://live.staticflickr.com/65535/50607295132_069ed53912_w.jpg', 'location 4', 'info about location 4', 'Mount Saint Helens, Washington', true );
+  (1, 3, 'https://picsum.photos/id/1003/200/300', 'location 1', 'info about location 1', 'Sandy River, Oregon', true ),
+  (2, 3, 'https://picsum.photos/id/1006/200/300', 'location 2', 'info about location 2', 'San Diego, California', true ),
+  (3, 3, 'https://picsum.photos/id/1019/200/300', 'location 3', 'info about location 3', 'Kings Valley, Hawaii', true ),
+  (4, 3, 'https://picsum.photos/id/1018/200/300', 'location 4', 'info about location 4', 'Mount Saint Helens, Washington', true );
 
 
 INSERT INTO ratings (id, location_id, stars)
