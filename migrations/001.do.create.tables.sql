@@ -32,6 +32,7 @@ CREATE TABLE comments (
   location_id INTEGER REFERENCES locations(id) ON DELETE CASCADE,
   title TEXT NOT NULL,
   content TEXT,
+  -- author id so that it can reference it when adding comments and not show on public locations? 
   author_id INTEGER REFERENCES users(id),
 );
 
