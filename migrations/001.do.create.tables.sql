@@ -33,7 +33,7 @@ CREATE TABLE comments (
   title TEXT NOT NULL,
   content TEXT,
   -- author id so that it can reference it when adding comments and not show on public locations? 
-  author_id INTEGER REFERENCES users(id),
+  author_id INTEGER REFERENCES users(id)
 );
 
 -- create new table with user_id & location_id to post into 

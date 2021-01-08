@@ -1,14 +1,15 @@
-const express = require('express'); 
-const xss = require('xss'); 
-const path = require('path'); 
+const express = require('express');
+const xss = require('xss');
+const path = require('path');
 
 //service import it 
-const CommentsService = require('./comments-service'); 
+const CommentsService = require('./comments-service');
 const requireAuth = require('../middleware/jwt-auth');
+const { on } = require('process');
 
 //router + json parser
-const commentsRouter = express.Router(); 
-const jsonParser = express.json(); 
+const commentsRouter = express.Router();
+const jsonParser = express.json();
 
 
 //routes
@@ -29,7 +30,7 @@ commentsRouter
 
 // get comments by location id? 
 commentsRouter
-.route('/:location_id')
+  .route('/:location_id')
   .get(requireAuth, (req, res, next) => {
     CommentsService.getAllCommentsByLocId(
       req.app.get('db'),
@@ -44,12 +45,38 @@ commentsRouter
         res.json(comments.map(CommentsService.serializeComment));
       })
       .catch(next);
-})
+  })
 
 
-// post new comment 
+  // post new comment 
+  .post(requireAuth, jsonParser, (req, res, next) => {
+    const author_id = req.user.id;
+    const { title, content, location_id } = req.body;
+    const newComment = { title, content, location_id, author_id };
+
+    for (const [key, value] of Object.entries(newComment))
+      if (value === null)
+        return res.status(400).json({
+          error: `missing ${key} in request body`
+        });
+    //send data to service to save in the db:
+    CommentsService.insertComment(
+      req.app.get('db'),
+      newComment
+    )
+      .then(comment => {
+        const commentPath = path.posix.join(req.originalUrl, `/${comment.id}`);
+        const serializeComment = CommentsService.serializeComment(comment);
+        res
+          .status(201)
+          .location(commentPath)
+          .json(serializeComment);
+      })
+      .catch(err => {
+        next(err);
+      });
+  });
 
 
-  
 
 module.exports = commentsRouter; 

@@ -30,9 +30,9 @@ VALUES
 (1,1,5);
 
 
-INSERT INTO comments (id, location_id, title, content)
+INSERT INTO comments (id, location_id, title, content,author_id)
 VALUES 
-(1,1,'title','here are some notes');
+(1,1,'title','here are some notes',3);
 
 INSERT INTO user_locations (id, user_id, location_id)
 VALUES
