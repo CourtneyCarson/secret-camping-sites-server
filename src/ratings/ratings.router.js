@@ -25,9 +25,9 @@ ratingsRouter
         res.json(loc);
       })
       .catch(next);
-  })
+  });
 
-  
+
 
 
 // get ratings by location id?
@@ -40,9 +40,12 @@ ratingsRouter
     )
       .then(ratings => {
         if (!ratings) {
-          return res.status(400).json({
-            error: { message: `rating does not exist` }
-          });
+          return res.json(
+            {
+              "location_id": req.params.location_id,
+              "average_rating": "1"
+            }
+          );
         }
         res.json(ratings);
       })
@@ -52,7 +55,7 @@ ratingsRouter
   // post a new rating to db 
   .post(requireAuth, jsonParser, (req, res, next) => {
     const { stars } = req.body;
-    const newRating = { user_id: req.user.id, stars, location_id:req.params.location_id };
+    const newRating = { user_id: req.user.id, stars, location_id: req.params.location_id };
 
 
     RatingsService.insertNewRating(

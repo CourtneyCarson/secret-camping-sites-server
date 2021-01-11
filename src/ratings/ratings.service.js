@@ -17,8 +17,8 @@ const RatingsService = {
     return db('ratings')
       .select('location_id', db.raw('AVG(stars) as average_rating'))
       .where({ 'location_id': loc_id })
-      .groupBy('location_id');
-
+      .groupBy('location_id')
+      .first();
   },
 
 
