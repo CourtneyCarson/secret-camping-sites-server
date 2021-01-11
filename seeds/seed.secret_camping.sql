@@ -43,5 +43,6 @@ VALUES
 
 -- this will start the unique id's at 4 since seed files 
 SELECT setval('user_locations_id_seq', 4);
+SELECT setval('ratings_id_seq', 2);
 
 COMMIT;

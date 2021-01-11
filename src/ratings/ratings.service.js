@@ -4,39 +4,34 @@ const RatingsService = {
       .select('*')
       .from('ratings');
   },
-  // getRatingsByUser(db, user_id) {
-  //   return db
-  //     .from('comments')
-  //     .select('*');
+
+  // getAllRatingsByLocId(db, loc_id) {
+  //   return db('ratings')
+  //     // .select('*')
+  //     .avg('stars')
+  //     // .select('location_id, AVG(stars)')
+  //     // .from('ratings')
+  //     .where({ 'location_id': loc_id })
   // },
-  // 
   getAllRatingsByLocId(db, loc_id) {
-    return db
-      .select('*')
-      .from('ratings')
-      .where({ 'location_id': loc_id });
+    return db('ratings')
+      .select('location_id', db.raw('AVG(stars) as average_rating'))
+      .where({ 'location_id': loc_id })
+      .groupBy('location_id');
+
   },
-  // getCommentById(db, comment_id) {
-  //   return db
-  //     .from('comments')
-  //     .select('*')
-  //     .where({ 'id': comment_id })
-  //     .first();
-  // },
-  // insertComment(db, newComment) {
-  //   return db
-  //     .insert(newComment)
-  //     .into('comments')
-  //     .returning('*')
-  //     .then(rows => {
-  //       return rows[0];
-  //     });
-  // },
-  // deleteComment(db, comment_id) {
-  //   return db('comments')
-  //     .where({ 'id': comment_id })
-  //     .delete();
-  // },
+
+
+  insertNewRating(db, newRating) {
+    return db
+      .insert(newRating)
+      .into('ratings')
+      .returning('*')
+      .then(rows => {
+        return rows[0];
+      });
+  },
+
   serializeRating(rating) {
     const { id, location_id, stars } = rating;
     return {
