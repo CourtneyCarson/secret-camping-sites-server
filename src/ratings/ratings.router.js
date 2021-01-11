@@ -1,0 +1,69 @@
+const express = require('express');
+const xss = require('xss');
+const path = require('path');
+const requireAuth = require('../middleware/jwt-auth');
+
+const RatingsService = require('./ratings.service');
+
+const ratingsRouter = express.Router();
+const jsonParser = express.json();
+
+// get all locations
+ratingsRouter
+  .route('/')
+  .get(requireAuth, (req, res, next) => {
+    RatingsService.getAllRatings(
+      req.app.get('db'),
+      req.user.id
+    )
+      .then(loc => {
+        if (!loc) {
+          return res.status(404).json({
+            error: { message: `rating does not exist` }
+          });
+        }
+        res.json(loc);
+      })
+      .catch(next);
+  })
+
+
+  // get ratings by location id?
+ratingsRouter
+.route('/:location_id')
+.get(requireAuth, (req, res, next) => {
+  RatingsService.getAllRatingsByLocId(
+    req.app.get('db'),
+    req.params.location_id
+  )
+    .then(ratings => {
+      if (!ratings) {
+        return res.status(400).json({
+          error: { message: `rating does not exist` }
+        });
+      }
+      res.json(ratings.map(RatingsService.serializeRating));
+    })
+    .catch(next);
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = ratingsRouter;

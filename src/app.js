@@ -12,6 +12,7 @@ const usersRouter = require('./users/users-router');
 const commentsRouter = require('./comments/comments-router');
 const locationRouter = require('./locations/locations.router');
 const userLocationRouter = require('./user-locations/user-location-router');
+const ratingsRouter = require('./ratings/ratings.router');
 
 // build app object
 const app = express();
@@ -36,7 +37,8 @@ app.use('/api/location', locationRouter)
 app.use('/api/userloc', userLocationRouter);
 // add comments to locations saved to your account:
 app.use('/api/comments', commentsRouter);
-
+// ratings 
+app.use('/api/ratings', ratingsRouter)
 
 
 

@@ -29,16 +29,17 @@ INSERT INTO ratings (id, location_id, stars)
 VALUES 
 (1,1,5);
 
-
-INSERT INTO comments (id, location_id, title, content,author_id)
-VALUES 
-(1,1,'title','here are some notes',3);
-
 INSERT INTO user_locations (id, user_id, location_id)
 VALUES
 (1,1,1),
 (2,1,3),
 (3,1,4);
+
+INSERT INTO comments (id, user_location_id, title, content,author_id)
+VALUES 
+(1,1,'title','here are some notes',3);
+
+
 
 -- this will start the unique id's at 4 since seed files 
 SELECT setval('user_locations_id_seq', 4);

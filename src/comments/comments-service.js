@@ -13,7 +13,7 @@ const CommentsService = {
     return db
       .select('*')
       .from('comments')
-    .where({ 'location_id': loc_id})
+    .where({ 'user_location_id': loc_id})
   },
   getCommentById(db, comment_id) {
     return db
@@ -37,10 +37,10 @@ const CommentsService = {
       .delete();
   },
   serializeComment(comment) {
-    const { id, location_id, title, content } = comment;
+    const { id, user_location_id, title, content } = comment;
     return {
       id: id,
-      location_id: location_id,
+      user_location_id: user_location_id,
       title: title,
       content: content
     };

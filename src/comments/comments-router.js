@@ -28,13 +28,13 @@ commentsRouter
   });
 
 
-// get comments by location id? 
+// get comments by location id?
 commentsRouter
   .route('/:location_id')
   .get(requireAuth, (req, res, next) => {
     CommentsService.getAllCommentsByLocId(
       req.app.get('db'),
-      req.params.loc_id
+      req.params.location_id
     )
       .then(comments => {
         if (!comments) {
@@ -52,7 +52,7 @@ commentsRouter
   .post(requireAuth, jsonParser, (req, res, next) => {
     const author_id = req.user.id;
     const { title, content, location_id } = req.body;
-    const newComment = { title, content, location_id, author_id };
+    const newComment = { title, content, user_location_id: location_id, author_id };
 
     for (const [key, value] of Object.entries(newComment))
       if (value === null)
