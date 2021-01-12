@@ -1,8 +1,8 @@
--- DROP TABLE IF EXISTS users;
--- DROP TABLE IF EXISTS locations;
--- DROP TABLE IF EXISTS ratings;
--- DROP TABLE IF EXISTS comments;
--- DROP TABLE IF EXISTS user_locations;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS locations;
+DROP TABLE IF EXISTS ratings;
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS user_locations;
 
 
 CREATE TABLE users (

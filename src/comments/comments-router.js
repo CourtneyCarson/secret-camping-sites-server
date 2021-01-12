@@ -75,7 +75,20 @@ commentsRouter
       .catch(err => {
         next(err);
       });
-  });
+  })
+
+  .delete((req, res, next) => {
+		const { location_id } = req.params;
+		CommentsService.deleteComment(req.app.get("db"), location_id)
+			.then((numRowsAffected) => {
+        // logger.info(`Note with id ${id} deleted.`);
+         res.json({
+          error: { message: `comment with id ${location_id} deleted.` }
+        });
+				res.status(204).end();
+			})
+			.catch(next);
+	});
 
 
 
