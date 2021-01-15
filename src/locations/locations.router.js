@@ -149,7 +149,7 @@ locationRouter
   });
 
 
-  /////////////////////////////// SAVE ANOTHER USERS POST TO YOUR ACCOUNT - WILL DO BY UTILIZING USER ID //////////////////////////////////////
+/////////////////////////////// SAVE ANOTHER USERS POST TO YOUR ACCOUNT - WILL DO BY UTILIZING USER ID //////////////////////////////////////
 ////save another users posts to your
 // post - create many to many table 
 // create - user location table & new service/router

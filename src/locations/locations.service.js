@@ -1,3 +1,14 @@
+function titleCase(str) {
+  str = str.toLowerCase().split(' ');
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+  }
+  return str.join(' ');
+}
+
+
+
+
 const LocationService = {
   getAllLocations(db) {
     return db
@@ -21,7 +32,9 @@ const LocationService = {
     return db
       .from('locations')
       .select('*')
-      .where('keyword', 'like', `%${key_word}%`);
+      .where('keyword', 'like', `%${key_word}%`)
+      .orWhere('keyword', 'like', `%${key_word.toUpperCase()}%`)
+      .orWhere('keyword', 'like', `%${titleCase(key_word)}%`)
   },
 
   // update location to save to acct 
