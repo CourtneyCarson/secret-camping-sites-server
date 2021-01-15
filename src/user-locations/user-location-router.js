@@ -99,7 +99,7 @@ userLocationRouter
 
 
 
-  //get trigger points by id
+  //get locations by id
   .get((req, res) => {
     res.json(res.locations);
   });
