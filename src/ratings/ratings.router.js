@@ -57,7 +57,6 @@ ratingsRouter
     const { stars } = req.body;
     const newRating = { user_id: req.user.id, stars, location_id: req.params.location_id };
 
-
     RatingsService.insertNewRating(
       req.app.get('db'),
       newRating
@@ -70,7 +69,6 @@ ratingsRouter
   });
 
 
-// post for new ratings 
 
 
 module.exports = ratingsRouter;

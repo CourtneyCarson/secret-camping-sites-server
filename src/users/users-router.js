@@ -32,7 +32,7 @@ usersRouter
     if (passwordError)
       return res.status(400)
         .json({ error: passwordError });
-    
+
     UserService.hasUserWithUserName(
       req.app.get('db'),
       email
@@ -41,7 +41,7 @@ usersRouter
         if (hasUserWithUserName)
           return res.status(400)
             .json({ error: `Username already taken` });
-        
+
         return UserService.hashPassword(password)
           .then(hashedPassword => {
             const newUser = {
@@ -64,36 +64,36 @@ usersRouter
 
 
 
-  // individual users by id
+// individual users by id
 usersRouter
-.route('/:user_id')
-.all((req, res, next) => {
-  const { user_id } = req.params;
-  UsersService.getById(req.app.get('db'), user_id)
-    .then(user => {
-      if (!user) {
-        return res
-          .status(404)
-          .send({ error: { message: `User does not exist` } });
-      }
-      res.user = user;
-      next();
-    })
-    .catch(next);
-})
-.get((req, res) => {
-  res.json(UsersService.serializeUser(res.user));
-})
-.delete((req, res, next) => {
-  const { user_id } = req.params;
-  UsersService.deleteUser(
-    req.app.get('db'),
-    user_id
-  )
-    .then(numRowsAffected => {
-      res.status(204).end();
-    })
-    .catch(next);
-});
+  .route('/:user_id')
+  .all((req, res, next) => {
+    const { user_id } = req.params;
+    UsersService.getById(req.app.get('db'), user_id)
+      .then(user => {
+        if (!user) {
+          return res
+            .status(404)
+            .send({ error: { message: `User does not exist` } });
+        }
+        res.user = user;
+        next();
+      })
+      .catch(next);
+  })
+  .get((req, res) => {
+    res.json(UsersService.serializeUser(res.user));
+  })
+  .delete((req, res, next) => {
+    const { user_id } = req.params;
+    UsersService.deleteUser(
+      req.app.get('db'),
+      user_id
+    )
+      .then(numRowsAffected => {
+        res.status(204).end();
+      })
+      .catch(next);
+  });
 module.exports = usersRouter;
 

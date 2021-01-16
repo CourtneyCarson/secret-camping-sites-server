@@ -32,16 +32,13 @@ app.use('/api/auth', authRouter);
 // sign up route: 
 app.use('/api/users', usersRouter);
 // to view public locations:
-app.use('/api/location', locationRouter)
+app.use('/api/location', locationRouter);
 // to save a public location to your account :
 app.use('/api/userloc', userLocationRouter);
 // add comments to locations saved to your account:
 app.use('/api/comments', commentsRouter);
 // ratings 
-app.use('/api/ratings', ratingsRouter)
-
-
-
+app.use('/api/ratings', ratingsRouter);
 
 
 app.get('/', (req, res) => {

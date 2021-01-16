@@ -4,15 +4,6 @@ const RatingsService = {
       .select('*')
       .from('ratings');
   },
-
-  // getAllRatingsByLocId(db, loc_id) {
-  //   return db('ratings')
-  //     // .select('*')
-  //     .avg('stars')
-  //     // .select('location_id, AVG(stars)')
-  //     // .from('ratings')
-  //     .where({ 'location_id': loc_id })
-  // },
   getAllRatingsByLocId(db, loc_id) {
     return db('ratings')
       .select('location_id', db.raw('AVG(stars) as average_rating'))
@@ -20,8 +11,6 @@ const RatingsService = {
       .groupBy('location_id')
       .first();
   },
-
-
   insertNewRating(db, newRating) {
     return db
       .insert(newRating)
@@ -31,7 +20,6 @@ const RatingsService = {
         return rows[0];
       });
   },
-
   serializeRating(rating) {
     const { id, location_id, stars } = rating;
     return {
@@ -40,6 +28,5 @@ const RatingsService = {
       stars: stars,
     };
   },
-
 };
 module.exports = RatingsService;

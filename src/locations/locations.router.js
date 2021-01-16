@@ -32,7 +32,6 @@ locationRouter
     const { title, content, keyword, image } = req.body;
     const newLocation = { user_id: req.user.id, title, content, keyword, image };
 
-
     LocationService.insertNewLocation(
       req.app.get('db'),
       newLocation

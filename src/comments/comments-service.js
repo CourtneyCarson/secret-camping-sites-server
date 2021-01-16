@@ -8,12 +8,11 @@ const CommentsService = {
       .from('comments')
       .select('*');
   },
-  // 
   getAllCommentsByLocId(db, loc_id) {
     return db
       .select('*')
       .from('comments')
-    .where({ 'user_location_id': loc_id})
+      .where({ 'user_location_id': loc_id });
   },
   getCommentById(db, comment_id) {
     return db
@@ -45,6 +44,5 @@ const CommentsService = {
       content: content
     };
   }
-
 };
 module.exports = CommentsService;

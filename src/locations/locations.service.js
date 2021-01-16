@@ -1,12 +1,10 @@
 function titleCase(str) {
   str = str.toLowerCase().split(' ');
   for (var i = 0; i < str.length; i++) {
-    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
   }
   return str.join(' ');
 }
-
-
 
 
 const LocationService = {
@@ -15,8 +13,6 @@ const LocationService = {
       .select('*')
       .from('locations');
   },
-  
- 
   insertNewLocation(db, newLoc) {
     return db
       .insert(newLoc)
@@ -26,7 +22,6 @@ const LocationService = {
         return rows[0];
       });
   },
-
   // get items by keyword (filter) 
   getItemsByKeyword(db, key_word) {
     return db
@@ -34,9 +29,8 @@ const LocationService = {
       .select('*')
       .where('keyword', 'like', `%${key_word}%`)
       .orWhere('keyword', 'like', `%${key_word.toUpperCase()}%`)
-      .orWhere('keyword', 'like', `%${titleCase(key_word)}%`)
+      .orWhere('keyword', 'like', `%${titleCase(key_word)}%`);
   },
-
   // update location to save to acct 
   getLocationsById(db, loc_id) {
     return db
@@ -47,16 +41,15 @@ const LocationService = {
   },
   updateLocation(db, location_id, newLocation) {
     return db('locations')
-        .update(newLocation, returning = true)
-        .where({
-            id: location_id
-        })
-        .returning('*')
-        .then(rows => {
-            return rows[0]
-        })
+      .update(newLocation, returning = true)
+      .where({
+        id: location_id
+      })
+      .returning('*')
+      .then(rows => {
+        return rows[0];
+      });
   },
-
   // save a public post to your account 
   getUsersById(db, user_id) {
     return db
@@ -69,16 +62,13 @@ const LocationService = {
     return db('locations')
       .update(newLocation, returning = true)
       .where({
-      id: user_id
+        id: user_id
       })
       .returning('*')
       .then(rows => {
-      return rows[0]
-    })
+        return rows[0];
+      });
   },
 };
-
-
-
 
 module.exports = LocationService; 

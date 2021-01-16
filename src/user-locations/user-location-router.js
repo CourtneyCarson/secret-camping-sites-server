@@ -24,29 +24,27 @@ userLocationRouter
         res.json(user_loc);
       })
       .catch(next);
-  })
+  });
 
 // route for getting all locations user has saved
 userLocationRouter
-.route('/user')
+  .route('/user')
   .get(requireAuth, (req, res, next) => {
-  console.log('words')
-  UserLocationService.getLocationsByUser(
-    req.app.get('db'),
-    req.user.id
-  )
-    .then(user_loc => {
-      if (!user_loc) {
-        return res.status(404).json({
-          error: { message: `Users Location do not exist` }
-        });
-      }
-      res.json(user_loc);
-    })
-    .catch(next);
-}) 
-
-
+    console.log('words');
+    UserLocationService.getLocationsByUser(
+      req.app.get('db'),
+      req.user.id
+    )
+      .then(user_loc => {
+        if (!user_loc) {
+          return res.status(404).json({
+            error: { message: `Users Location do not exist` }
+          });
+        }
+        res.json(user_loc);
+      })
+      .catch(next);
+  });
 
 
 /// routes by id -- middleware for post req above. 
@@ -68,7 +66,6 @@ userLocationRouter
             error: { message: `Location does not exist` }
           });
         }
-        // res.locations?? res.location?? -- attaches to the res object if it exists 
         res.locations = loc;
         next();
       })
@@ -76,27 +73,21 @@ userLocationRouter
   })
 
   .post(requireAuth, jsonParser, (req, res, next) => {
-    const location_id = res.locations.id
+    const location_id = res.locations.id;
     const newUserLoc = { user_id: req.user.id, location_id };
 
-  
-          UserLocationService.insertUserLocation(
-            req.app.get('db'),
-            newUserLoc
-          )
-            .then(loc => {
-              res
-                //display the 201 status code
-                .status(201)
-                .json(loc);
-            })
-            .catch(next);
+    UserLocationService.insertUserLocation(
+      req.app.get('db'),
+      newUserLoc
+    )
+      .then(loc => {
+        res
+          //display the 201 status code
+          .status(201)
+          .json(loc);
       })
-  
-
-
-
-
+      .catch(next);
+  })
 
 
   //get locations by id

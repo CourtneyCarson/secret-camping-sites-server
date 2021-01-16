@@ -106,7 +106,7 @@ describe('Locations API:', function () {
 
   });
 
-//post 
+  //post 
   // post 
   it('should create and return a new location when provided valid data', function () {
     const newItem = {
@@ -125,7 +125,7 @@ describe('Locations API:', function () {
       .expect(201)
       .expect(res => {
         expect(res.body).to.be.a('object');
-        expect(res.body).to.include.keys( 'user_id', 'image', 'title', 'content', 'keyword');
+        expect(res.body).to.include.keys('user_id', 'image', 'title', 'content', 'keyword');
         expect(res.body.title).to.equal(newItem.title);
       });
   });

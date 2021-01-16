@@ -1,5 +1,4 @@
 // register a new user
-
 const express = require('express');
 const xss = require('xss');
 const bcrypt = require('bcryptjs');

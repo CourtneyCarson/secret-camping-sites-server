@@ -115,6 +115,4 @@ describe('Ratings API:', function () {
       });
   });
 
-
-
 });
