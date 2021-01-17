@@ -221,3 +221,5 @@ Use command line to navigate into the project folder and run the following in te
 * To migrate the database ===> npm run migrate -- 1
 * To run Node server (on port 8000) ===> npm run dev
 * To run tests ===> npm run test
+
+Seed Command: psql -U courtneycarson -d secret_camping -f ./seeds/seed.secret_camping.sql
